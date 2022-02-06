@@ -9,39 +9,39 @@ import { Grid } from "@material-ui/core";
 import Backdrop from "@material-ui/core/Backdrop";
 import { DropzoneAreaBase } from "material-ui-dropzone";
 import Button from "@material-ui/core/Button";
-
-const useStyles = makeStyles(theme => ({
+import init from "../services/init";
+const useStyles = makeStyles((theme) => ({
   root: {
-    flexGrow: 1
+    flexGrow: 1,
   },
   margin: {
     margin: theme.spacing(1),
-    width: "90%"
+    width: "90%",
   },
   backdrop: {
     zIndex: theme.zIndex.drawer + 1,
-    color: "#fff"
+    color: "#fff",
   },
   content: {
     color: "#1E266D",
     fontFamily: "Poppins",
-    flexGrow: 1
+    flexGrow: 1,
   },
   subcontent: {
-    color: "#455880"
+    color: "#455880",
   },
   paper: {
     padding: theme.spacing(5),
     textAlign: "center",
     color: theme.palette.text.secondary,
-    backgroundColor: "#008DE4"
+    backgroundColor: "#008DE4",
   },
   iconButton: {
-    padding: 10
+    padding: 10,
   },
   logo: {
     width: 190,
-    height: 25
+    height: 25,
   },
   uploadBox: {},
   verifyButton: {
@@ -52,34 +52,42 @@ const useStyles = makeStyles(theme => ({
     color: "#008DE4",
     height: 38,
     borderRadius: 0,
-    fontSize: 11
+    fontSize: 11,
   },
 
   dashMidGrey: {
-    color: "#7F8C98"
+    color: "#7F8C98",
   },
   dashDarkGray: {
-    color: "#787878"
+    color: "#787878",
   },
   dashBlack: {
-    color: "#111921"
+    color: "#111921",
   },
   dashBlue: {
-    color: "#008DE4"
+    color: "#008DE4",
   },
   disabled: {
-    color: "A6A6A6"
+    color: "A6A6A6",
   },
   dashWhite: {
-    color: "white"
-  }
+    color: "white",
+  },
 }));
 
 function UploadPage() {
-  const [open, setOpen] = React.useState(false);
   const classes = useStyles();
+  const [open, setOpen] = useState(false);
+
+  useEffect(() => {
+    init();
+  }, []);
+
   const handleToggle = () => {
     setOpen(!open);
+  };
+  const handleClose = () => {
+    setOpen(false);
   };
   return (
     <CssBaseline>
@@ -88,12 +96,16 @@ function UploadPage() {
           <Button variant="outlined" color="primary" onClick={handleToggle}>
             upload files
           </Button>
-          <Backdrop className={classes.backdrop} open={open}>
+          <Backdrop
+            className={classes.backdrop}
+            open={open}
+            onClick={handleClose}
+          >
             <Grid item container justify="center" xs={6} sm={6} md={8} lg={8}>
               <Paper className={classes.paper} elevation={1} square>
                 <Grid item>
                   <DropzoneAreaBase
-                    onChange={files => console.log("Files:", files)}
+                    onChange={(files) => console.log("Files:", files)}
                   />
                 </Grid>
                 <Grid item>
