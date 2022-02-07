@@ -4,14 +4,9 @@ import { CssBaseline, Paper, Input } from "@material-ui/core";
 import { makeStyles, withStyles } from "@material-ui/core/styles";
 import { apps, user } from "@dash-incubator/dapp-sdk";
 
-import image from "./uploaders/image-uploader";
-import audio from "./uploaders/audio-uploader";
-import video from "./uploaders/video-uploader";
 //import imageView from "./uploaders/image/image-view";
 //import audioView from "./uploaders/audio/audio-view";
 //import videoView from "./uploaders/video/video-view";
-import init from "../services/init";
-//import "./UploaderStyle.scss";
 
 const useStyles = makeStyles((theme) => ({}));
 
@@ -61,24 +56,7 @@ const Uploader = () => {
       saveAudio(selectedFile);
     }
   };
-  /*
-  const handleSubmit = () => {
-    const formData = new FormData();
 
-    formData.append("File", selectedFile);
-
-    if (selectedFile.type.startsWith("image/")) {
-      image(selectedFile);
-      console.log("selected type ", selectedFile.type);
-    } else if (selectedFile.type.startsWith("video/")) {
-      video(selectedFile);
-      console.log("selected type", selectedFile.type);
-    } else if (selectedFile.type.startsWith("audio/")) {
-      audio(selectedFile);
-      console.log("selected type", selectedFile.type);
-    }
-  };
-*/
   return (
     <>
       <div className="div">

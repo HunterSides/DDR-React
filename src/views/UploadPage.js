@@ -8,7 +8,7 @@ import { makeStyles, withStyles } from "@material-ui/core/styles";
 import { CircularProgress, CssBaseline, Paper } from "@material-ui/core";
 import { Grid } from "@material-ui/core";
 import Backdrop from "@material-ui/core/Backdrop";
-import { DropzoneAreaBase } from "material-ui-dropzone";
+
 import Button from "@material-ui/core/Button";
 import { toast } from "react-toastify";
 import init from "../services/init";
