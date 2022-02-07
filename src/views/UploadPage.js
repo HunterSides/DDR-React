@@ -1,18 +1,28 @@
+/* eslint-disable no-unused-vars */
 import React, { useState, useEffect } from "react";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import { Redirect, useHistory, withRouter } from "react-router-dom";
-//imports
 
+import { apps, user } from "@dash-incubator/dapp-sdk";
 import { makeStyles, withStyles } from "@material-ui/core/styles";
-import { CssBaseline, Paper } from "@material-ui/core";
+import { CircularProgress, CssBaseline, Paper } from "@material-ui/core";
 import { Grid } from "@material-ui/core";
 import Backdrop from "@material-ui/core/Backdrop";
 import { DropzoneAreaBase } from "material-ui-dropzone";
 import Button from "@material-ui/core/Button";
+import { toast } from "react-toastify";
 import init from "../services/init";
+import Uploader from "../components/Uploader";
 const useStyles = makeStyles((theme) => ({
   root: {
     flexGrow: 1,
+  },
+  wrapper: {
+    display: "flex",
+    flexDirection: "column",
+    padding: theme.spacing(2),
+    width: theme.spacing(50),
+    border: `1px solid ${theme.palette.primary.main}`,
   },
   margin: {
     margin: theme.spacing(1),
@@ -75,14 +85,36 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-function UploadPage() {
+const UploadPage = () => {
   const classes = useStyles();
   const [open, setOpen] = useState(false);
+  const [isInitialized, setIsInitialized] = useState(false);
 
   useEffect(() => {
-    init();
-  }, []);
+    let initialized = false;
 
+    const init = async () => {
+      if (isInitialized) {
+        return;
+      }
+
+      initialized = await user.session.start();
+
+      if (initialized) {
+        await apps.upload.register();
+        setIsInitialized(true);
+
+        console.log("tDash founds, all relevant contract info cached");
+      } else {
+        console.log(
+          `Deposit tDash in <b>${user.session.wallet.address}</b> to continue`
+        );
+        setTimeout(init, 1000 * 30);
+      }
+    };
+
+    init();
+  });
   const handleToggle = () => {
     setOpen(!open);
   };
@@ -92,38 +124,34 @@ function UploadPage() {
   return (
     <CssBaseline>
       <div className={classes.root}>
-        <div className="overlay">
-          <Button variant="outlined" color="primary" onClick={handleToggle}>
-            upload files
-          </Button>
-          <Backdrop
-            className={classes.backdrop}
-            open={open}
-            onClick={handleClose}
-          >
-            <Grid item container justify="center" xs={6} sm={6} md={8} lg={8}>
-              <Paper className={classes.paper} elevation={1} square>
-                <Grid item>
-                  <DropzoneAreaBase
-                    onChange={(files) => console.log("Files:", files)}
-                  />
-                </Grid>
-                <Grid item>
-                  <Button
-                    className={classes.verifyButton}
-                    variant="contained"
-                    disableElevation
-                    type="submit"
-                  >
-                    Upload
-                  </Button>
-                </Grid>
-              </Paper>
-            </Grid>
-          </Backdrop>
-        </div>
+        {!isInitialized ? (
+          <CircularProgress />
+        ) : (
+          <div className="overlay">
+            <Button variant="outlined" color="primary" onClick={handleToggle}>
+              upload files
+            </Button>
+            <Backdrop className={classes.backdrop} open={open}>
+              <Grid
+                item
+                container
+                justifyContent="center"
+                xs={6}
+                sm={6}
+                md={8}
+                lg={8}
+              >
+                <Paper className={classes.paper} elevation={1} square>
+                  <Grid item>
+                    <Uploader />
+                  </Grid>
+                </Paper>
+              </Grid>
+            </Backdrop>
+          </div>
+        )}
       </div>
     </CssBaseline>
   );
-}
+};
 export default withRouter(UploadPage);
