@@ -11,8 +11,9 @@ import Backdrop from "@material-ui/core/Backdrop";
 
 import Button from "@material-ui/core/Button";
 import { toast } from "react-toastify";
-import init from "../services/init";
-import Uploader from "../components/Uploader";
+
+import Upload from "../components/Upload";
+
 const useStyles = makeStyles((theme) => ({
   root: {
     flexGrow: 1,
@@ -129,7 +130,7 @@ const UploadPage = () => {
         ) : (
           <div className="overlay">
             <Button variant="outlined" color="primary" onClick={handleToggle}>
-              upload files
+              show uploader modal
             </Button>
             <Backdrop className={classes.backdrop} open={open}>
               <Grid
@@ -141,9 +142,9 @@ const UploadPage = () => {
                 md={8}
                 lg={8}
               >
-                <Paper className={classes.paper} elevation={1} square>
+                <Paper elevation={1} square>
                   <Grid item>
-                    <Uploader />
+                    <Upload />
                   </Grid>
                 </Paper>
               </Grid>

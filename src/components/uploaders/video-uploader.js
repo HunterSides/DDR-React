@@ -11,3 +11,16 @@ const video = () => {
   return save();
 };
 export default video;
+/* type Input = {
+                    banner?: File;
+                    compress?: boolean;
+                    description?: string;
+                    encrypted?: boolean;
+                    keywords?: string[];
+                    name?: string;
+                    secret?: string;
+                    thumbnail?: File;
+                    transcoded?: boolean;
+                    video?: File | { content: string, path: string }[] | string;
+                     };
+                   */
