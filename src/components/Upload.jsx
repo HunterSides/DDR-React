@@ -12,7 +12,8 @@ const Uploader = () => {
   const [assetType, setAsset] = useState()
   const [banner, setBanner] = useState()
   const [thumbnail, setThumbnail] = useState()
-
+  const [encryptChecked, setIsEncryptChecked] = useState(false)
+  const [compressChecked, setIsCompressChecked] = useState(false)
   
   const [imageOptions, setImageOptions] = useState({
     name: '',
@@ -82,27 +83,38 @@ const Uploader = () => {
   async function save() {
    
     if (selectedFile.type.startsWith("image/")){
-      console.log(imageOptions)
-        let result = await apps.upload.image.save(
-            await apps.upload.image.create(imageOptions)
-          );
-          console.log("Result:", result)
+      if (selectedFiles) {
+          imageOptions.gallery = selectedFiles;
+      }
+      else {
+          imageOptions.image = selectedFile;
+      }
+      let result = await apps.upload.image.save(
+          await apps.upload.image.create(imageOptions)
+        );
+        console.log("Result:", result)
 
-    } else if (selectedFile.type.startsWith("video/")) {
-        console.log(videoOptions)
-        let result = await apps.upload.video.save(
-            await apps.upload.video.create(videoOptions)
-          );
-          console.log("Result:", result)
-
-    } else if (selectedFile.type.startsWith("audio/")) {
-        let result = await apps.upload.audio.save(
-            await apps.upload.audio.create(audioOptions)
-          );
-          console.log("Result:", result)
-          
-    } else {
-          console.log("error could not save file", selectedFile)
+  } else if (selectedFile.type.startsWith("video/")) {
+    if (selectedFile) {
+      videoOptions.video = selectedFile;
+    }
+      let result = await apps.upload.video.save(
+          await apps.upload.video.create(videoOptions)
+        );
+        console.log("Result:", result)
+  
+  } else if (selectedFile.type.startsWith("audio/")) {
+    
+    if (selectedFile) {
+      audioOptions.audio = selectedFile;
+    }
+      let result = await apps.upload.audio.save(
+          await apps.upload.audio.create(audioOptions)
+        );
+        console.log("Result:", result)
+  
+  } else {
+        console.log("error could not save file", selectedFile)
     }
   }
   
