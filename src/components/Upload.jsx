@@ -47,9 +47,9 @@ const Uploader = () => {
   })
  
 
-  const handleFile = (event) => {
-    let file = event.target.files[0];
-    let files = event.target.files
+  const handleFile = (e) => {
+    let file = e.target.files[0];
+    let files = e.target.files
 
     setSelectedFile(file);
     setSelectedFiles(files)
@@ -63,8 +63,9 @@ const Uploader = () => {
     }
     
   };
-  const handleSubmit = () => {
-  
+  const handleSubmit = (e) => {
+    e.preventDefault();
+
     if (selectedFile.type.startsWith("image/")) {
         save(selectedFile); 
     } else if (selectedFile.type.startsWith("video/")) {
@@ -78,49 +79,59 @@ const Uploader = () => {
 
   const handleAdd = (e) => {
     e.preventDefault();
-    videoOptions.keywords.push(words)
+
+    if (assetType === "image"){
+      imageOptions.keywords.push(words)
+    } else if (assetType === "video"){
+      videoOptions.keywords.push(words)
+    } else if (assetType === "audio"){
+      audioOptions.keywords.push(words)
+    }
+    
     setWords("")
   };
   
   async function save() {
    
-    if (selectedFile.type.startsWith("image/")){
-      console.log("uploading image with these selected options:", imageOptions)
-      if (selectedFiles) {
-          imageOptions.gallery = selectedFiles;
+        if (selectedFile.type.startsWith("image/")){
+          
+              if (selectedFiles) {
+                  imageOptions.gallery = selectedFiles;
+              }
+              else {
+                  imageOptions.image = selectedFile;
+              }
+              let result = await apps.upload.image.save(
+                await apps.upload.image.create(imageOptions)
+              );
+              console.log("uploading image with these selected options:", imageOptions)   
+              console.log("Result:", result)
+              
+      } else if (selectedFile.type.startsWith("video/")) {
+      
+              if (selectedFile) {
+                videoOptions.video = selectedFile;
+              }
+              let result = await apps.upload.video.save(
+                await apps.upload.video.create(videoOptions)
+              );
+              console.log("uploading video with these selected options:", videoOptions)
+              console.log("Result:", result)
+              
+      } else if (selectedFile.type.startsWith("audio/")) {
+        
+              if (selectedFile) {
+                audioOptions.audio = selectedFile;
+              }
+              let result = await apps.upload.audio.save(
+                await apps.upload.audio.create(audioOptions)
+              );
+              console.log("uploading audio with these selected options:", audioOptions)
+              console.log("Result:", result)
+      } else {
+              console.log("error could not save file", selectedFile)
       }
-      else {
-          imageOptions.image = selectedFile;
-      }
-      let result = await apps.upload.image.save(
-          await apps.upload.image.create(imageOptions)
-        );
-        console.log("Result:", result)
-
-  } else if (selectedFile.type.startsWith("video/")) {
-    console.log("uploading video with these selected options:", videoOptions)
-    if (selectedFile) {
-      videoOptions.video = selectedFile;
-    }
-      let result = await apps.upload.video.save(
-          await apps.upload.video.create(videoOptions)
-        );
-        console.log("Result:", result)
-       
-  } else if (selectedFile.type.startsWith("audio/")) {
-    console.log("uploading audio with these selected options:", audioOptions)
-    if (selectedFile) {
-      audioOptions.audio = selectedFile;
-    }
-      let result = await apps.upload.audio.save(
-          await apps.upload.audio.create(audioOptions)
-        );
-        console.log("Result:", result)
-  
-  } else {
-        console.log("error could not save file", selectedFile)
-    }
-  }
+}
   
   return (
     <>
@@ -155,7 +166,16 @@ const Uploader = () => {
                   </div>
                   <div>
                       <label htmlFor="keywords"> Keywords: </label> 
-                      <input onChange={(e) => setImageOptions({...imageOptions, keywords: e.target.value})} value={imageOptions.keywords} type="text" name="keywords" id="keywords"/> 
+                      <input type="text" onChange={(e) => setWords(e.target.value)} value={words}/> 
+                      <button type="reset" onClick={handleAdd} >add</button>
+                      <ul>
+                        {
+                          imageOptions.keywords.map((item, key) => 
+                          <li {...{key}}>  
+                            {item}
+                          </li>)
+                        }
+                      </ul>
                   </div>
                   <div>
                   
@@ -189,9 +209,19 @@ const Uploader = () => {
                 <input accept="image/*" onChange={(e) => setAudioOptions({...audioOptions, banner: e.target.files[0]})}  type="file" name="banner" id="banner"/> 
             </div>
                <div>
-                   <label htmlFor="keywords"> Keywords: </label> 
-                   <input onChange={(e) => setAudioOptions({...audioOptions, keywords: e.target.value})} value={audioOptions.keywords} type="text" name="keywords" id="keywords"/> 
-               </div>
+                <label htmlFor="keywords"> Keywords: </label> 
+                <input type="text" onChange={(e) => setWords(e.target.value)} value={words}/> 
+                <button type="reset" onClick={handleAdd} >add</button>
+                <ul>
+                  {
+                    audioOptions.keywords.map((item, key) => 
+                    <li {...{key}}>  
+                      {item}
+                    </li>)
+                  }
+                </ul>
+                
+            </div>
                <div>
                       <label htmlFor="encrypted"> Encrypted </label> 
                       <input checked={audioOptions.encrypt} onChange={(e) => setAudioOptions({...audioOptions, encrypt: e.target.checked})} type="checkbox" name="encrypt" id="encrypt" /> 
