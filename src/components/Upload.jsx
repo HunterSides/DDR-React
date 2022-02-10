@@ -10,11 +10,7 @@ const Uploader = () => {
   const [selectedFile, setSelectedFile] = useState();
   const [selectedFiles, setSelectedFiles] = useState([])
   const [assetType, setAsset] = useState()
-  const [banner, setBanner] = useState()
-  const [thumbnail, setThumbnail] = useState()
-  const [encryptChecked, setIsEncryptChecked] = useState(false)
-  const [compressChecked, setIsCompressChecked] = useState(false)
-  
+  const [words, setWords] = useState([])
   const [imageOptions, setImageOptions] = useState({
     name: '',
     description: '',
@@ -22,26 +18,26 @@ const Uploader = () => {
     encrypt: false,
     gallery: selectedFiles,
     image: selectedFile,
-    keywords: [],
+    keywords: [{}],
     secret: '',
   })
   const [audioOptions, setAudioOptions] = useState({
   name: '',
   description: '',
-  banner: banner,
-  thumbnail: thumbnail,
+  banner: null,
+  thumbnail: null,
   compress: false,
   encrypt: false,
   audio: selectedFile,
-  keywords: [],
+  keywords: [{}],
   secret: '',
   transcoded: false
   })
   const [videoOptions, setVideoOptions] = useState({
   name: '',
   description: '',
-  banner: banner,
-  thumbnail: thumbnail,
+  banner: null,
+  thumbnail: null,
   compress: false,
   encrypt: false,
   video: selectedFile,
@@ -79,10 +75,17 @@ const Uploader = () => {
       console.log("unsupported file type", selectedFile.type)
     }
   };
+
+  const handleAdd = (e) => {
+    e.preventDefault();
+    videoOptions.keywords.push(words)
+    setWords("")
+  };
   
   async function save() {
    
     if (selectedFile.type.startsWith("image/")){
+      console.log("uploading image with these selected options:", imageOptions)
       if (selectedFiles) {
           imageOptions.gallery = selectedFiles;
       }
@@ -95,6 +98,7 @@ const Uploader = () => {
         console.log("Result:", result)
 
   } else if (selectedFile.type.startsWith("video/")) {
+    console.log("uploading video with these selected options:", videoOptions)
     if (selectedFile) {
       videoOptions.video = selectedFile;
     }
@@ -102,9 +106,9 @@ const Uploader = () => {
           await apps.upload.video.create(videoOptions)
         );
         console.log("Result:", result)
-  
+       
   } else if (selectedFile.type.startsWith("audio/")) {
-    
+    console.log("uploading audio with these selected options:", audioOptions)
     if (selectedFile) {
       audioOptions.audio = selectedFile;
     }
@@ -165,7 +169,7 @@ const Uploader = () => {
                   </div>
                   
               </form> 
-                                    </div>    
+                                      </div>    
           : assetType === "audio" ? <div>
            <form >
                <div>
@@ -176,6 +180,14 @@ const Uploader = () => {
                    <label htmlFor="description"> Description: </label> 
                    <input onChange={(e) => setAudioOptions({...audioOptions, description: e.target.value})} value={audioOptions.description} type="text" name="description" id="description"/> 
                </div>
+               <div>
+                <label htmlFor="thumbnail"> Thumbnail: </label> 
+                <input accept="image/*" onChange={(e) => setAudioOptions({...audioOptions, thumbnail: e.target.files[0]})} type="file" name="thumbnail" id="thumbnail"/> 
+            </div>
+            <div>
+                <label htmlFor="banner"> Banner: </label> 
+                <input accept="image/*" onChange={(e) => setAudioOptions({...audioOptions, banner: e.target.files[0]})}  type="file" name="banner" id="banner"/> 
+            </div>
                <div>
                    <label htmlFor="keywords"> Keywords: </label> 
                    <input onChange={(e) => setAudioOptions({...audioOptions, keywords: e.target.value})} value={audioOptions.keywords} type="text" name="keywords" id="keywords"/> 
@@ -190,7 +202,7 @@ const Uploader = () => {
                </div>
                
            </form> 
-                                    </div>  
+                                      </div>  
           : assetType === "video" ? <div>
         <form >
             <div>
@@ -202,20 +214,38 @@ const Uploader = () => {
                 <input onChange={(e) => setVideoOptions({...videoOptions, description: e.target.value})} value={videoOptions.description} type="text" name="description" id="description"/> 
             </div>
             <div>
-                <label htmlFor="keywords"> Keywords: </label> 
-                <input onChange={(e) => setVideoOptions({...videoOptions, keywords: e.target.value})} value={videoOptions.keywords} type="text" name="keywords" id="keywords"/> 
+                <label htmlFor="thumbnail"> Thumbnail: </label> 
+                <input accept="image/*" onChange={(e) => setVideoOptions({...videoOptions, thumbnail: e.target.files[0]})} type="file" name="thumbnail" id="thumbnail"/> 
             </div>
             <div>
-                      <label htmlFor="encrypted"> Encrypted </label> 
-                      <input checked={videoOptions.encrypt} onChange={(e) => setVideoOptions({...videoOptions, encrypt: e.target.checked})} type="checkbox" name="encrypt" id="encrypt" /> 
-                  </div>
+                <label htmlFor="banner"> Banner: </label> 
+                <input accept="image/*" onChange={(e) => setVideoOptions({...videoOptions, banner: e.target.files[0]})}  type="file" name="banner" id="banner"/> 
+            </div>
             <div>
-                <label htmlFor="compress"> compress: </label> 
+                <label htmlFor="keywords"> Keywords: </label> 
+                <input type="text" onChange={(e) => setWords(e.target.value)} value={words}/> 
+                <button type="reset" onClick={handleAdd} >add</button>
+                <ul>
+                  {
+                    videoOptions.keywords.map((item, key) => 
+                    <li {...{key}}>  
+                      {item}
+                    </li>)
+                  }
+                </ul>
+                
+            </div>
+            <div>
+                <label htmlFor="encrypted"> Encrypted </label> 
+                <input checked={videoOptions.encrypt} onChange={(e) => setVideoOptions({...videoOptions, encrypt: e.target.checked})} type="checkbox" name="encrypt" id="encrypt" /> 
+            </div>
+            <div>
+                <label htmlFor="compress"> Compress: </label> 
                 <input checked={videoOptions.compress} onChange={(e) => setVideoOptions({...videoOptions, compress: e.target.checked})}  type="checkbox" name="compress" id="compress"  /> 
             </div>
             
         </form> 
-                                    </div>  
+                                      </div>  
           : <></>}
         </label>
         <button className="box" onClick={handleSubmit}>
