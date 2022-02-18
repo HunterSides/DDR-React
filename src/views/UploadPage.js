@@ -102,7 +102,7 @@ const UploadPage = () => {
       initialized = await user.session.start();
 
       if (initialized) {
-        await apps.upload.register();
+        await apps.register();
         setIsInitialized(true);
 
         console.log("tDash founds, all relevant contract info cached");

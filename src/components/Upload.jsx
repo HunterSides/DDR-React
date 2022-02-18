@@ -101,8 +101,8 @@ const Uploader = () => {
               else {
                   imageOptions.image = selectedFile;
               }
-              let result = await apps.upload.image.save(
-                await apps.upload.image.create(imageOptions)
+              let result = await apps.image.save(
+                await apps.image.create(imageOptions)
               );
               console.log("uploading image with these selected options:", imageOptions)   
               console.log("Result:", result)
@@ -112,8 +112,8 @@ const Uploader = () => {
               if (selectedFile) {
                 videoOptions.video = selectedFile;
               }
-              let result = await apps.upload.video.save(
-                await apps.upload.video.create(videoOptions)
+              let result = await apps.video.save(
+                await apps.video.create(videoOptions)
               );
               console.log("uploading video with these selected options:", videoOptions)
               console.log("Result:", result)
@@ -123,8 +123,8 @@ const Uploader = () => {
               if (selectedFile) {
                 audioOptions.audio = selectedFile;
               }
-              let result = await apps.upload.audio.save(
-                await apps.upload.audio.create(audioOptions)
+              let result = await apps.audio.save(
+                await apps.audio.create(audioOptions)
               );
               console.log("uploading audio with these selected options:", audioOptions)
               console.log("Result:", result)
