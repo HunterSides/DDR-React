@@ -12,7 +12,7 @@ import Backdrop from "@material-ui/core/Backdrop";
 import Button from "@material-ui/core/Button";
 import { toast } from "react-toastify";
 
-import Upload from "../components/Upload";
+import Uploader from "../components/Uploader";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -144,7 +144,7 @@ const UploadPage = () => {
               >
                 <Paper elevation={1} square>
                   <Grid item>
-                    <Upload />
+                    <Uploader />
                   </Grid>
                 </Paper>
               </Grid>
