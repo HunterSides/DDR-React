@@ -600,8 +600,6 @@ const Uploader = () => {
         .upload-button {
          
           justify-content: center;
-          margin-top: auto;
-          margin-bottom: auto;
           padding-top: 7px;
           padding-bottom: 7px;
           padding-right: 17px;
@@ -610,6 +608,8 @@ const Uploader = () => {
           background-color: rgba(255, 255, 255, 1);
           margin-left: auto;
           margin-right: auto;
+          margin-top: auto;
+          margin-bottom: auto;
           cursor: pointer;
           
 
