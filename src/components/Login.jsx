@@ -31,7 +31,7 @@ const Login = () => {
               Login
             </button>
             <button className="create-account-button" >
-              Create Account
+              Create an account
             </button>
         </div>      
         </div>
@@ -41,7 +41,7 @@ const Login = () => {
           display: flex;
           flex-direction: column;
           align-items: center;
-          gap: 50px;
+          gap: 26px;
           width: 679px;
           height: 496px;
           padding-top: 166px;
@@ -59,11 +59,14 @@ const Login = () => {
         
         .text-area {
           padding-top: 50px;
+          padding-right: 20px
         }
         .text-input {
           width: 440px;
           height: 50px;
           border: none;
+          padding-top: 10px;
+          padding-left: 10px;
           background-color: #E8E8E8;
         }
         .text-input::placeholder {
@@ -77,7 +80,8 @@ const Login = () => {
             gap: 60px
         }
         .login-button {
-          
+          padding-top: 10px;
+          padding-bottom: 10px;
           padding-right: 30px;
           padding-left: 30px;
           border: none;
