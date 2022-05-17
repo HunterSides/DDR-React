@@ -43,11 +43,10 @@ const Signup = () => {
           display: flex;
           flex-direction: column;
           align-items: center;
-          gap: 26px;
           width: 679px;
           height: 496px;
-          padding-top: 166px;
-          padding-left: 45px;
+          padding-top: 101px;
+          padding-left: 60px;
         }
         textarea:focus, input:focus{
           outline: none;
@@ -57,10 +56,11 @@ const Signup = () => {
             display: flex;
             flex-direction: column;
             gap: 50px;
+            
         }
         
         .text-area {
-          padding-top: 50px;
+          padding-top: 46px;
           padding-right: 20px
         }
         .text-input {
@@ -80,8 +80,7 @@ const Signup = () => {
         .button-section {
             display: flex;
             justify-content: center;
-            padding-right: 40px;
-            gap: 60px
+            
         }
         .signup-button {
           padding-top: 10px;

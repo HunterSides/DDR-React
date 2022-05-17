@@ -40,8 +40,8 @@ const Login = () => {
           gap: 26px;
           width: 679px;
           height: 496px;
-          padding-top: 166px;
-          padding-left: 45px;
+          padding-top: 101px;
+          padding-left: 60px;
         }
         textarea:focus, input:focus{
           outline: none;
