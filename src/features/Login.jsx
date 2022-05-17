@@ -1,21 +1,18 @@
 /* eslint-disable no-unused-vars */
 import React, { useState, useEffect, useRef } from "react";
-import DashLogo from '../DashLogo.png'
+import DashLogo from '../assets/DashLogo.png'
 import { apps, user } from "@dash-incubator/dapp-sdk";
 
 
 
 const Login = () => {
 
-  
-  
   return (
     <>
       <div className="login-container">
           <div className="logo-section">
                 <img src={DashLogo} className="logo" alt="Logo" />
           </div>
-
           <div className="login-section">
               <form>
                   <div className="text-area">
@@ -25,10 +22,9 @@ const Login = () => {
                     <input className="text-input" placeholder="Password" type="text" name="name" id="name"/>
                   </div>
               </form> 
-          
         <div className="button-section">
             <button className="login-button" >
-              Login
+              Log in
             </button>
             <button className="create-account-button" >
               Create an account

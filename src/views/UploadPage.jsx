@@ -12,7 +12,7 @@ import Backdrop from "@material-ui/core/Backdrop";
 import Button from "@material-ui/core/Button";
 import { toast } from "react-toastify";
 
-import Uploader from "../components/Uploader";
+import Uploader from "../features/Uploader";
 
 const useStyles = makeStyles((theme) => ({
   root: {
