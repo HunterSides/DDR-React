@@ -83,11 +83,13 @@ const Login = () => {
           border: none;
           background-color: rgba(0, 141, 228, 1 );
           cursor: pointer;
+          height: 41px;
+          
 
           color: rgba(255, 255, 255, 1);
           font-size: 20px;
           letter-spacing: 0%;
-          text-align: left;
+          
           font-family: "M PLUS 1p Bold", sans-serif;
           font-style: normal;
           font-weight: 700;
@@ -101,6 +103,7 @@ const Login = () => {
           border: none;
           background-color: rgba(255, 255, 255, 1);
           cursor: pointer;
+          
 
           color: rgba(0, 141, 228, 1 );
           font-size: 20px;
