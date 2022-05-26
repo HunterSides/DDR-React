@@ -34,7 +34,7 @@ const EditProfile = () => {
                     <input className="text-input" placeholder="Username" type="text" name="name" id="username"/>
                   </div>
                   <div className="create-password-area">
-                    <Typography sx={{ lineHeight: "26px", fontWeight: 700, color: "#BBBBBB", px: "104px" }}> Create new password (if needed)</Typography>
+                    <Typography sx={{ fontWeight: 700, color: "#BBBBBB", pl: "104px" }}> Create new password (if needed)</Typography>
                     <input className="text-input" placeholder="Current password" type="text" name="name" id="current-password"/>
                   </div>
                   <div className="text-area">
