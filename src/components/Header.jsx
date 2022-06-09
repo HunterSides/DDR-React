@@ -27,9 +27,7 @@ const headerTheme = createTheme({
     fontFamily: 'MPLUS 1p Bold',
 
   }));
-  const StyledToolbar = styled(Toolbar)(({ theme }) => ({
-    
-  }));
+
   const StyledButton = styled(Button) (({ theme }) => ({
     border: 'none',
     backgroundColor: 'inherit',
@@ -47,11 +45,7 @@ const headerTheme = createTheme({
     textUnderlineOffset: '20%'
     }
   }));
-  const SearchContainer = styled('div')(({ theme }) => ({
-    flexGrow: 0.85,
-    paddingTop: '20px',
-    paddingBottom: '9px'
-  }));
+
   const Search = styled('div')(({ theme }) => ({
     position: 'relative',
     borderRadius: '10px',
@@ -88,6 +82,17 @@ const headerTheme = createTheme({
       }
     },
   }));
+  
+  const StyledToolbar = styled(Toolbar)(({ theme }) => ({
+
+  }));
+  const SearchContainer = styled('div')(({ theme }) => ({
+
+  }));
+  const ButtonContainer = styled('div')(()=> ({
+  }))
+  const IconContainer = styled('div')(()=> ({
+  }))
 
   const data = [
   "Paris",
@@ -128,7 +133,7 @@ const headerTheme = createTheme({
     return data.filter((d) => d.toLowerCase().includes(query));
   }
   };
-    
+
 const Header = () => {
   const [searchQuery, setSearchQuery] = useState("");
   const dataFiltered = filterData(searchQuery, data);
@@ -136,14 +141,21 @@ const Header = () => {
     return (
       <>
         <ThemeProvider theme={headerTheme}>
-        <StyledAppbar sx={{height: 65 }}elevation="0" color="primary" position="static">
-          <StyledToolbar>
-              <Typography variant="h2" component="div" sx={{ flexGrow: 1 }}>
-                <IconButton color="inherit">
+        <StyledAppbar sx={{ height: 65 }} elevation="0" color="primary" position="static">
+          <StyledToolbar sx={{ justifyContent: 'space-between'}}>
+            <IconContainer>
+              <Typography variant="h2" component="div" >
+                <IconButton onClick={() => navigate("/")} color="inherit">
                     <img src={DashHeaderLogo} alt="Logo" />
                 </IconButton>
               </Typography>
-            <SearchContainer >
+            </IconContainer>
+
+            <SearchContainer 
+              sx={{ 
+                display: { xs: 'none', md: 'flex', lg: 'flex' },
+                paddingLeft: {xs: 'none', md: 'none', lg: '315px'}
+                }}>
               <Search>
                 <SearchIconWrapper>
                   <img src={SearchSVG} alt="Search" />
@@ -155,22 +167,24 @@ const Header = () => {
                 />
               </Search>
             </SearchContainer>
+            <ButtonContainer>
               <StyledButton onClick={() => navigate("/catalog")}>
                 Catalog
               </StyledButton>
               <StyledButton onClick={() => navigate("/users")}>
                 Users
               </StyledButton>
-             <IconButton onClick={() => navigate("/upload")}>
+              <IconButton onClick={() => navigate("/upload")}>
                   <img src={UploadButton} alt="Upload" />
               </IconButton>
-           
               <IconButton onClick={() => navigate("/user/profile")}>
                   <img src={ProfileButton} alt="Profile" />
               </IconButton>
-              <StyledButton >
+              <StyledButton onClick={() => navigate("/login")}>
                 Log in
               </StyledButton>
+            </ButtonContainer>
+              
           </StyledToolbar>
         </StyledAppbar>
         </ThemeProvider>

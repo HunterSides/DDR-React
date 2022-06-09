@@ -1,11 +1,13 @@
 /* eslint-disable no-unused-vars */
 import React, { useState, useEffect, useRef } from "react";
+import { useNavigate } from 'react-router-dom';
 import { Typography, IconButton, Avatar } from '@mui/material';
 import { green } from "@mui/material/colors";
 import AddCircleIcon from '@mui/icons-material/AddCircle'
 import Badge from '@mui/material/Badge';
 import Item from "../assets/Item.png"
 const Profile = () => {
+  const navigate = useNavigate();
   return (
     <>
       <div className="profile-container">
@@ -18,7 +20,7 @@ const Profile = () => {
                     <Typography sx={{ lineHeight: "26px", fontSize: "20px", fontWeight: 700, color: "#BFBBBB", pt: "18px", pb: "23px" }}> @user_name </Typography>
                 </div>
                 <div className="button-section">
-                    <button className="edit-button" >
+                    <button onClick={() => navigate("/user/edit-profile")}className="edit-button" >
                         Edit
                     </button>
                 </div> 
