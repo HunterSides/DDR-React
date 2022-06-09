@@ -1,4 +1,3 @@
-import {  withRouter } from "react-router-dom";
 import { CssBaseline } from "@material-ui/core";
 import Profile from "../features/Profile";
 import Header from "../components/Header";
@@ -11,4 +10,4 @@ const ProfilePage = () => {
     </CssBaseline>
   );
 };
-export default withRouter(ProfilePage);
+export default ProfilePage;

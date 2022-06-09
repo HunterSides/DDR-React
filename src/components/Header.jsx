@@ -1,5 +1,6 @@
 
 import { useState } from "react";
+import { useNavigate } from 'react-router-dom';
 import { styled } from '@mui/material/styles';
 import { ThemeProvider, createTheme } from "@mui/material";
 import AppBar from "@mui/material/AppBar";
@@ -131,7 +132,7 @@ const headerTheme = createTheme({
 const Header = () => {
   const [searchQuery, setSearchQuery] = useState("");
   const dataFiltered = filterData(searchQuery, data);
-
+  const navigate = useNavigate();
     return (
       <>
         <ThemeProvider theme={headerTheme}>
@@ -154,18 +155,17 @@ const Header = () => {
                 />
               </Search>
             </SearchContainer>
-              <StyledButton >
+              <StyledButton onClick={() => navigate("/catalog")}>
                 Catalog
               </StyledButton>
-              <StyledButton >
+              <StyledButton onClick={() => navigate("/users")}>
                 Users
               </StyledButton>
-              { 
-              /*<IconButton onClick={() => navigate("/upload")}>
+             <IconButton onClick={() => navigate("/upload")}>
                   <img src={UploadButton} alt="Upload" />
-              </IconButton>*/
-              }
-              <IconButton >
+              </IconButton>
+           
+              <IconButton onClick={() => navigate("/user/profile")}>
                   <img src={ProfileButton} alt="Profile" />
               </IconButton>
               <StyledButton >

@@ -1,4 +1,4 @@
-import {  withRouter } from "react-router-dom";
+
 import { CssBaseline } from "@material-ui/core";
 import Signup from "../features/Signup";
 import Header from "../components/Header";
@@ -11,4 +11,4 @@ const SignupPage = () => {
     </CssBaseline>
   );
 };
-export default withRouter(SignupPage);
+export default SignupPage;

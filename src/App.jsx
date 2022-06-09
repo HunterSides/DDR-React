@@ -1,5 +1,5 @@
 import React from "react";
-import { BrowserRouter as Switch, Route } from "react-router-dom";
+import { Routes, Route } from "react-router-dom";
 
 import UploadPage from "./views/UploadPage";
 import LoginPage from "./views/LoginPage"
@@ -11,16 +11,17 @@ import UserSearchPage from "./views/UserSearchPage";
 export default function App() {
   return (
     <div className="App">
-      <Switch>
-        <Route path="/" exact component={UploadPage} />
-        <Route path="/login" exact component={LoginPage} />
-        <Route path="/signup" exact component={SignupPage} />
-        <Route path="/documents" exact component={DocumentsPage} />
-        <Route path="/search" exact component={UserSearchPage} />
-        <Route path="/user/documents" exact component={DocumentsPage} />
-        <Route path="/user/profile" exact component={ProfilePage} />
-        <Route path="/user/edit-profile" exact component={EditProfilePage} />
-      </Switch>
+      <Routes>
+        <Route path="/" element={<LoginPage />} />
+        <Route path="/upload" element={<UploadPage />} />
+        <Route path="/login" element={<LoginPage />} />
+        <Route path="/signup" element={<SignupPage />} />
+        <Route path="/catalog" element={<DocumentsPage />} />
+        <Route path="/users" element={<UserSearchPage />} />
+        <Route path="/user/documents" element={<DocumentsPage />} />
+        <Route path="/user/profile" element={<ProfilePage />} />
+        <Route path="/user/edit-profile" element={<EditProfilePage />} />
+      </Routes>
     </div>
   );
 }

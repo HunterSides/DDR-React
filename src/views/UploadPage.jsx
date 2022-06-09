@@ -1,7 +1,7 @@
 /* eslint-disable no-unused-vars */
 import React, { useState, useEffect } from "react";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
-import { Redirect, useHistory, withRouter } from "react-router-dom";
+import { Redirect, useHistory } from "react-router-dom";
 
 import { apps, user } from "@dash-incubator/dapp-sdk";
 import { makeStyles, withStyles } from "@material-ui/core/styles";
@@ -155,4 +155,4 @@ const UploadPage = () => {
     </CssBaseline>
   );
 };
-export default withRouter(UploadPage);
+export default UploadPage
