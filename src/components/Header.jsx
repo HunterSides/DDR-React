@@ -1,6 +1,6 @@
 
 import { useState } from "react";
-import { styled, alpha } from '@mui/material/styles';
+import { styled } from '@mui/material/styles';
 import { ThemeProvider, createTheme } from "@mui/material";
 import AppBar from "@mui/material/AppBar";
 import Toolbar from "@mui/material/Toolbar";
@@ -11,54 +11,81 @@ import SearchIcon from "@mui/icons-material/Search";
 import TextField from "@mui/material/TextField";
 import InputBase from '@mui/material/InputBase';
 import DashHeaderLogo from "../assets/DashHeaderLogo.png"
-
+import UploadButton from "../assets/UploadButton.svg"
+import SearchSVG from "../assets/magnifyingglass.svg"
+import ProfileButton from "../assets/ProfileButton.svg"
 
 const headerTheme = createTheme({
     palette: {
       primary: {
         main: "#008DE4",
-        fontFamily: 'Mplus 1p Bold'
       },
     },
   });
+  const StyledAppbar = styled(AppBar) (({ theme }) => ({
+    fontFamily: 'MPLUS 1p Bold',
+
+  }));
+  const StyledToolbar = styled(Toolbar)(({ theme }) => ({
+    
+  }));
+  const StyledButton = styled(Button) (({ theme }) => ({
+    border: 'none',
+    backgroundColor: 'inherit',
+    textTransform: 'none',
+    fontFamily: "M PLUS 1p Bold",
+    fontStyle: 'normal',
+    fontSize: '24px',
+    color: '#FFFFFF',
+    paddingTop: '10px',
+    paddingLeft: '10px',
+    paddingRight: '10px',
+
+    '&:hover, &:active, &:focus': {
+    textDecoration: 'underline',
+    textUnderlineOffset: '20%'
+    }
+  }));
   const SearchContainer = styled('div')(({ theme }) => ({
-    flexGrow: 0.85
+    flexGrow: 0.85,
+    paddingTop: '20px',
+    paddingBottom: '9px'
   }));
   const Search = styled('div')(({ theme }) => ({
     position: 'relative',
     borderRadius: '10px',
     backgroundColor: 'rgba(250, 250, 250, 0.93)',
-    width: 225,
-    height: 36,
-
+    width: '250px',
+    height: '36px',
   }));
-  
   const SearchIconWrapper = styled('div')(({ theme }) => ({
-    padding: theme.spacing(0,1,0),
     height: '100%',
     position: 'absolute',
-    pointerEvents: 'none',
+    paddingLeft: '12px',
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
   }));
   
   const StyledInputBase = styled(InputBase)(({ theme }) => ({
-    
     '& .MuiInputBase-input': {
-      padding: theme.spacing(1, 1, 1, 0),
+      padding: theme.spacing(1.25, 1, 1, 0),
       // vertical padding + font size from searchIcon
-      paddingLeft: `calc(1em + ${theme.spacing(4)})`,
+      paddingLeft: `calc(1em + ${theme.spacing(2.5)})`,
     },
     'input': {
       '&::placeholder': {
         textOverflow: 'ellipsis !important',
-        color: 'rgba(60, 60, 67)',
-        fontSize: '17px'
-
+        fontFamily: "M PLUS 1p Bold",
+        fontWeight: 700,
+        fontStyle: 'normal',
+        opacity: 1,
+        letterSpacing: '-0.408px',
+        lineHeight: '22px',
+        fontSize: '17px',
+        color: "rgba(60, 60, 67, 0.6)",
       }
     },
-
   }));
 
   const data = [
@@ -73,6 +100,7 @@ const headerTheme = createTheme({
   "Rio de Janeiro",
   "Dublin"
   ];
+
   const SearchBar = ({setSearchQuery}) => (
     <form>
       <TextField
@@ -105,9 +133,10 @@ const Header = () => {
   const dataFiltered = filterData(searchQuery, data);
 
     return (
+      <>
         <ThemeProvider theme={headerTheme}>
-        <AppBar elevation="0" color="primary" position="static">
-          <Toolbar>
+        <StyledAppbar sx={{height: 65 }}elevation="0" color="primary" position="static">
+          <StyledToolbar>
               <Typography variant="h2" component="div" sx={{ flexGrow: 1 }}>
                 <IconButton color="inherit">
                     <img src={DashHeaderLogo} alt="Logo" />
@@ -116,7 +145,8 @@ const Header = () => {
             <SearchContainer >
               <Search>
                 <SearchIconWrapper>
-                  <SearchIcon sx={{fontSize: "25px", color: "#999999"}}/>
+                  <img src={SearchSVG} alt="Search" />
+                  
                 </SearchIconWrapper>
                 <StyledInputBase
                   placeholder="Search"
@@ -124,12 +154,51 @@ const Header = () => {
                 />
               </Search>
             </SearchContainer>
-                <Button color="inherit"> Catalog </Button>
-                <Button color="inherit"> Users </Button>
-                <Button color="inherit"> Log in </Button>
-          </Toolbar>
-        </AppBar>
+              <StyledButton >
+                Catalog
+              </StyledButton>
+              <StyledButton >
+                Users
+              </StyledButton>
+              { 
+              /*<IconButton onClick={() => navigate("/upload")}>
+                  <img src={UploadButton} alt="Upload" />
+              </IconButton>*/
+              }
+              <IconButton >
+                  <img src={ProfileButton} alt="Profile" />
+              </IconButton>
+              <StyledButton >
+                Log in
+              </StyledButton>
+          </StyledToolbar>
+        </StyledAppbar>
         </ThemeProvider>
+        <style jsx>{`
+          .menu-button {
+            border: none;
+            background-color: inherit;
+            font-family: "M PLUS 1p Bold"
+            font-style: normal;
+            font-size: 24px;
+            color: #FFFFFF;
+            padding-left: 10px;
+            padding-right: 10px;
+          }
+          .login-button-focus {
+            border: none;
+            background-color: inherit;
+            font-family: "M PLUS 1p Bold"
+            font-style: normal;
+            font-size: 24px;
+            color: #FFFFFF;
+            text-decoration: underline;
+            text-underline-offset: 20%;
+            padding-left: 10px;
+            padding-right: 10px;
+          }
+        `}</style>
+      </>
         
     );
 }
