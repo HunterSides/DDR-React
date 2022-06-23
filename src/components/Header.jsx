@@ -15,6 +15,12 @@ import DashHeaderLogo from "../assets/DashHeaderLogo.png"
 import UploadButton from "../assets/UploadButton.svg"
 import SearchSVG from "../assets/magnifyingglass.svg"
 import ProfileButton from "../assets/ProfileButton.svg"
+import Box from '@mui/material/Box';
+import Menu from '@mui/material/Menu';
+import MenuIcon from '@mui/icons-material/Menu';
+import MenuItem from '@mui/material/MenuItem';
+
+const pages = ['Catalog', 'Users', 'Upload', 'Profile', 'Login'];
 
 const headerTheme = createTheme({
     palette: {
@@ -25,7 +31,6 @@ const headerTheme = createTheme({
   });
   const StyledAppbar = styled(AppBar) (({ theme }) => ({
     fontFamily: 'MPLUS 1p Bold',
-
   }));
 
   const StyledButton = styled(Button) (({ theme }) => ({
@@ -84,7 +89,7 @@ const headerTheme = createTheme({
   }));
   
   const StyledToolbar = styled(Toolbar)(({ theme }) => ({
-
+    
   }));
   const SearchContainer = styled('div')(({ theme }) => ({
 
@@ -137,11 +142,28 @@ const headerTheme = createTheme({
 const Header = () => {
   const [searchQuery, setSearchQuery] = useState("");
   const dataFiltered = filterData(searchQuery, data);
+  const [anchorElNav, setAnchorElNav] = useState(null);
+  const [anchorElUser, setAnchorElUser] = useState(null);
+
+  const handleOpenNavMenu = (event) => {
+    setAnchorElNav(event.currentTarget);
+  };
+  const handleOpenUserMenu = (event) => {
+    setAnchorElUser(event.currentTarget);
+  };
+
+  const handleCloseNavMenu = () => {
+    setAnchorElNav(null);
+  };
+
+  const handleCloseUserMenu = () => {
+    setAnchorElUser(null);
+  };
   const navigate = useNavigate();
     return (
       <>
-        <ThemeProvider theme={headerTheme}>
-        <StyledAppbar sx={{ height: 65 }} elevation="0" color="primary" position="static">
+      <ThemeProvider theme={headerTheme}>
+        <StyledAppbar sx={{ height: 65 }} elevation="0" color="primary" >
           <StyledToolbar sx={{ justifyContent: 'space-between'}}>
             <IconContainer>
               <Typography variant="h2" component="div" >
@@ -150,7 +172,6 @@ const Header = () => {
                 </IconButton>
               </Typography>
             </IconContainer>
-
             <SearchContainer 
               sx={{ 
                 display: { xs: 'none', md: 'flex', lg: 'flex' },
@@ -159,7 +180,6 @@ const Header = () => {
               <Search>
                 <SearchIconWrapper>
                   <img src={SearchSVG} alt="Search" />
-                  
                 </SearchIconWrapper>
                 <StyledInputBase
                   placeholder="Search"
@@ -167,7 +187,9 @@ const Header = () => {
                 />
               </Search>
             </SearchContainer>
-            <ButtonContainer>
+            <ButtonContainer sx={{ 
+                display: { xs: 'none', md: 'flex', lg: 'flex' }
+                }}>
               <StyledButton onClick={() => navigate("/catalog")}>
                 Catalog
               </StyledButton>
@@ -184,10 +206,56 @@ const Header = () => {
                 Log in
               </StyledButton>
             </ButtonContainer>
-              
+            <Box sx={{ flexGrow: 0, display: { xs: 'flex', md: 'none' } }}>
+                <IconButton
+                  aria-label="account of current user"
+                  aria-controls="menu-appbar"
+                  aria-haspopup="true"
+                  onClick={handleOpenNavMenu}
+                  color="inherit"
+                  
+                >
+                  <MenuIcon sx={{fontSize:'30px'}}/>
+                </IconButton>
+                <Menu
+                  id="menu-appbar"
+                  anchorEl={anchorElNav}
+                  anchorOrigin={{
+                    vertical: 'bottom',
+                    horizontal: 'left',
+                  }}
+                  keepMounted
+                  transformOrigin={{
+                    vertical: 'top',
+                    horizontal: 'left',
+                  }}
+                  open={Boolean(anchorElNav)}
+                  onClose={handleCloseNavMenu}
+                  sx={{
+                    display: { xs: 'block', md: 'none' },
+                  }}
+                >
+                  <MenuItem onClick={() => navigate("/catalog")}>
+                    <Typography textAlign="center">Catalog</Typography>
+                  </MenuItem>
+                  <MenuItem onClick={() => navigate("/users")}>
+                    <Typography textAlign="center">Users</Typography>
+                  </MenuItem>
+                  <MenuItem onClick={() => navigate("/upload")}>
+                    <Typography textAlign="center">Upload</Typography>
+                  </MenuItem>
+                  <MenuItem onClick={() => navigate("/user/profile")}>
+                    <Typography textAlign="center">Profile</Typography>
+                  </MenuItem>
+                  <MenuItem onClick={() => navigate("/login")}>
+                    <Typography textAlign="center">Login</Typography>
+                  </MenuItem>
+                </Menu>
+              </Box>
           </StyledToolbar>
+
         </StyledAppbar>
-        </ThemeProvider>
+      </ThemeProvider>
         <style jsx>{`
           .menu-button {
             border: none;

@@ -6,9 +6,6 @@ import { apps, user } from "@dash-incubator/dapp-sdk";
 
 
 const Signup = () => {
-
-  
-  
   return (
     <>
       <div className="signup-container">
@@ -43,11 +40,13 @@ const Signup = () => {
           display: flex;
           flex-direction: column;
           align-items: center;
+          gap: 26px;
           width: 679px;
           height: 496px;
           padding-top: 101px;
           padding-left: 60px;
         }
+
         textarea:focus, input:focus{
           outline: none;
         }
@@ -81,6 +80,7 @@ const Signup = () => {
             display: flex;
             justify-content: center;
             
+            
         }
         .signup-button {
           padding-top: 10px;
@@ -101,9 +101,6 @@ const Signup = () => {
           font-style: normal;
           font-weight: 700;
         }
-
-     
-       
       `}</style>
     </>
   );

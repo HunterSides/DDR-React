@@ -2,13 +2,13 @@
 import React, { useState, useEffect } from "react";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import { Redirect, useHistory } from "react-router-dom";
-
+import Header from "../components/Header";
 import { apps, user } from "@dash-incubator/dapp-sdk";
 import { makeStyles, withStyles } from "@material-ui/core/styles";
 import { CircularProgress, CssBaseline, Paper } from "@material-ui/core";
 import { Grid } from "@material-ui/core";
 import Backdrop from "@material-ui/core/Backdrop";
-
+import Box from '@mui/material/Box';
 import Button from "@material-ui/core/Button";
 import { toast } from "react-toastify";
 
@@ -124,9 +124,13 @@ const UploadPage = () => {
   };
   return (
     <CssBaseline>
-      <div className={classes.root}>
+      <Header />
         {!isInitialized ? (
-          <CircularProgress />
+          
+         <Box sx={{ display: 'flex', paddingTop: "100px", paddingLeft: "30px" }}>
+              
+              <CircularProgress />
+         </Box>
         ) : (
           <div className="overlay">
             <Button variant="outlined" color="primary" onClick={handleToggle}>
@@ -151,7 +155,7 @@ const UploadPage = () => {
             </Backdrop>
           </div>
         )}
-      </div>
+
     </CssBaseline>
   );
 };
