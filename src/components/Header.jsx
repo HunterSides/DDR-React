@@ -188,7 +188,7 @@ const Header = () => {
               </Search>
             </SearchContainer>
             <ButtonContainer sx={{ 
-                display: { xs: 'none', md: 'flex', lg: 'flex' }
+                display: { xs: 'none', md: 'none', lg: 'flex' }
                 }}>
               <StyledButton onClick={() => navigate("/catalog")}>
                 Catalog
@@ -206,7 +206,7 @@ const Header = () => {
                 Log in
               </StyledButton>
             </ButtonContainer>
-            <Box sx={{ flexGrow: 0, display: { xs: 'flex', md: 'none' } }}>
+            <Box sx={{ flexGrow: 0, display: { xs: 'flex', md: 'flex', lg:'none' } }}>
                 <IconButton
                   aria-label="account of current user"
                   aria-controls="menu-appbar"
