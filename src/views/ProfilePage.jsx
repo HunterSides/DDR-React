@@ -4,10 +4,10 @@ import Header from "../components/Header";
 const ProfilePage = () => {
 
   return (
-    <CssBaseline>
+    <>
         <Header />
         <Profile />
-    </CssBaseline>
+    </>
   );
 };
 export default ProfilePage;

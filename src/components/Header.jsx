@@ -149,7 +149,7 @@ const Header = () => {
     setAnchorElNav(event.currentTarget);
   };
   const handleOpenUserMenu = (event) => {
-    setAnchorElUser(event.currentTarget);
+    setAnchorElUser(event.currentElement);
   };
 
   const handleCloseNavMenu = () => {
@@ -224,6 +224,7 @@ const Header = () => {
                     vertical: 'bottom',
                     horizontal: 'left',
                   }}
+                  disableScrollLock={true}
                   keepMounted
                   transformOrigin={{
                     vertical: 'top',
@@ -232,7 +233,7 @@ const Header = () => {
                   open={Boolean(anchorElNav)}
                   onClose={handleCloseNavMenu}
                   sx={{
-                    display: { xs: 'block', md: 'none' },
+                    display: { xs: 'block', md: 'block' },
                   }}
                 >
                   <MenuItem onClick={() => navigate("/catalog")}>

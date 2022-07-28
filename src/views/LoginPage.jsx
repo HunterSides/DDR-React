@@ -5,10 +5,12 @@ import Header from "../components/Header";
 const LoginPage = () => {
 
   return (
-    <CssBaseline>
+    <>
       <Header />
       <Login />
-    </CssBaseline>
+    </>
+     
+
   );
 };
 export default LoginPage;

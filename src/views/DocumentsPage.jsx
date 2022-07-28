@@ -5,10 +5,10 @@ import Header from "../components/Header";
 const DocumentsPage = () => {
 
   return (
-    <CssBaseline>
+    <>
         <Header />
         <Documents />
-    </CssBaseline>
+    </>
   );
 };
 export default DocumentsPage;

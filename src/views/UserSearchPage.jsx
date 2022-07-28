@@ -5,10 +5,10 @@ import Header from "../components/Header";
 const UserSearchPage = () => {
 
   return (
-    <CssBaseline>
+    <>
         <Header />
         <UserSearch />
-    </CssBaseline>
+    </>
   );
 };
 export default UserSearchPage;

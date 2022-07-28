@@ -5,10 +5,10 @@ import Header from "../components/Header";
 const SignupPage = () => {
 
   return (
-    <CssBaseline>
+    <>
         <Header />
         <Signup />
-    </CssBaseline>
+    </>
   );
 };
 export default SignupPage;

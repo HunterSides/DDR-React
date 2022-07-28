@@ -5,10 +5,10 @@ import Header from "../components/Header";
 const EditProfilePage = () => {
 
   return (
-    <CssBaseline>
+    <>
         <Header />
         <EditProfile />
-    </CssBaseline>
+    </>
   );
 };
 export default EditProfilePage;
